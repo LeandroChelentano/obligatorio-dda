@@ -19,7 +19,7 @@ public class Cliente extends Base {
 	@Column (nullable = false, unique = true)
 	private int CI;
 	
-	@Column (columnDefinition = "default(False)")
+	@Column (columnDefinition = "bool default(false)")
 	private boolean isPremium;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
