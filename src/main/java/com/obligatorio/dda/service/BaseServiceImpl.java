@@ -11,10 +11,9 @@ import com.obligatorio.dda.entity.Base;
 import com.obligatorio.dda.repository.BaseRepository;
 
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
-	
-	private static final long serialVersionUID = 1L;
-	
 	protected BaseRepository<E, ID> baseRepository;
+	
+	// private static final long serialVersionUID = 1L;
 
 	public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
 		super();
@@ -71,13 +70,13 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
 		}
 	}
 
-	public E update(ID Id, Optional<E> entity1) throws Exception{
+	@Override
+	@Transactional
+	public E update(Long Id, E newData) throws Exception {
 		try {
-			Optional<E> entityOptional = baseRepository.findById(Id);
-			E entityUpdate = entityOptional.get();
-			entityUpdate = baseRepository.save(entity1);
-			return entityUpdate;
-		}catch (Exception e){
+			newData.setId(Id);
+			return baseRepository.save(newData);
+		} catch (Exception e) {
 			throw e;
 		}
 	}

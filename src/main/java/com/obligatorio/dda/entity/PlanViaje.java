@@ -1,20 +1,19 @@
 package com.obligatorio.dda.entity;
 
-import java.time.LocalDateTime;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table (name = "planes")
 public class PlanViaje extends Base {
-	
 	@Column (length = 50)
 	private String Destino;
 	
 	@Column (name="Fecha")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime Fecha;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate Fecha;
 	
 	@Column (nullable = false, length = 20)
 	private String Modalidad;
@@ -39,11 +38,11 @@ public class PlanViaje extends Base {
 		this.Modalidad = Modalidad;
 	}
 
-	public LocalDateTime getFecha() {
+	public LocalDate getFecha() {
 		return this.Fecha;
 	}
 
-	public void setFecha(LocalDateTime Fecha) {
+	public void setFecha(LocalDate Fecha) {
 		this.Fecha = Fecha;
 	}
 
@@ -58,7 +57,7 @@ public class PlanViaje extends Base {
 
 	public PlanViaje() {}
 
-	public PlanViaje(String Destino, LocalDateTime Fecha, String Modalidad, int Precio) {
+	public PlanViaje(String Destino, LocalDate Fecha, String Modalidad, int Precio) {
 		this.Destino = Destino;
 		this.Fecha = Fecha;
 		this.Modalidad = Modalidad;

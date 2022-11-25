@@ -20,5 +20,5 @@ public interface BaseService<E extends Base, ID> extends Serializable {
 	
 	public void deleteById (ID Id) throws Exception;
 
-	// public E update(ID id, E entity) throws Exception;
+	public E update(Long id, E entity) throws Exception;
 }

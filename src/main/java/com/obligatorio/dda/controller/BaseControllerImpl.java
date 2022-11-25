@@ -14,8 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long>{
-
+public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 	@Autowired
 	protected S servicio;
 	
@@ -33,17 +32,17 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
 		return ResponseEntity.ok(oE);
 	}
 
-	@PutMapping ("/{id}")
-	public ResponseEntity <?> update (@RequestBody E entity, @PathVariable Long id) throws Exception{
-		Optional<E> otherEntity = servicio.findById(id);
-		if (!otherEntity.isPresent())
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update (@RequestBody E newData, @PathVariable Long id) throws Exception{
+		Optional<E> existingEntity = servicio.findById(id);
+		if (!existingEntity.isPresent())
 			return ResponseEntity.notFound().build();
 		
-		return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, otherEntity));
+		return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, newData));
 	}
 
-	@DeleteMapping ("/{id}")
-	public ResponseEntity <?> delete (@PathVariable Long id) throws Exception{
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete (@PathVariable Long id) throws Exception{
 		if (!servicio.findById(id).isPresent())
 			return ResponseEntity.notFound().build();
 		
@@ -53,10 +52,8 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
 	
 	@GetMapping
 	public List<E> readAll() throws Exception{
-		List<E> entities = (List<E>) StreamSupport
+		return (List<E>) StreamSupport
 			.stream(servicio.findAll().spliterator(), false)
 			.collect(Collectors.toList());
-		
-		return entities;
 	}
 }

@@ -6,20 +6,19 @@ import javax.persistence.*;
 @Entity
 @Table (name = "clientes")
 public class Cliente extends Base {
-
 	@Column (nullable = false, length = 50)
 	private String Nombre;
 	
 	@Column (nullable = false, length = 50)
 	private String Apellido;
 
-	@Column (nullable = false, length = 30, unique = true)
+	@Column (nullable = false, length = 50, unique = true)
 	private String Email;
 
-	@Column (nullable = false, unique = true)
-	private int CI;
+	@Column (nullable = false, unique = true, length = 8)
+	private String CI;
 	
-	@Column (columnDefinition = "bool default(false)")
+	@Column (columnDefinition = "bool default(false)", nullable = false)
 	private boolean isPremium;
 
 	@ManyToMany(cascade = CascadeType.REFRESH)
@@ -42,6 +41,14 @@ public class Cliente extends Base {
 		this.Apellido = apellido;
 	}
 
+	public String getCI() {
+		return this.CI;
+	}
+
+	public void setCI(String CI) {
+		this.CI = CI;
+	}
+
 	public String getEmail() {
 		return this.Email;
 	}
@@ -57,14 +64,23 @@ public class Cliente extends Base {
 	public void setIsPremium(boolean isPremium) {
 		this.isPremium = isPremium;
 	}
+
+	public List<PlanViaje> getViajes() {
+		return this.PlanesComprados;
+	}
+
+	public void setViajes(List<PlanViaje> PlanesComprados) {
+		this.PlanesComprados = PlanesComprados;
+	}
 	//#endregion
 
 	public Cliente() { }
 
-	public Cliente(String Nombre, String Apellido, String Email, boolean isPremium) {
+	public Cliente(String Nombre, String Apellido, String Email, boolean isPremium, String CI) {
 		this.Nombre = Nombre;
 		this.Apellido = Apellido;
 		this.Email = Email;
+		this.CI = CI;
 		this.isPremium = isPremium;
 	}
 }
