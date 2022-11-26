@@ -3,16 +3,18 @@ package com.obligatorio.dda.entity;
 import java.util.*;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table (name = "clientes")
 public class Cliente extends Base {
-	@Column (nullable = false, length = 50)
+	@Column (nullable = false, length = 30)
 	private String Nombre;
 	
-	@Column (nullable = false, length = 50)
+	@Column (nullable = false, length = 30)
 	private String Apellido;
 
-	@Column (nullable = false, length = 50, unique = true)
+	@Column (nullable = false, length = 30, unique = true)
 	private String Email;
 
 	@Column (nullable = false, unique = true, length = 8)

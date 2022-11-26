@@ -65,6 +65,10 @@ public class RelationController {
     
     listaViajes.add(viaje);
     cliente.setViajes(listaViajes);
+    
+    if (listaViajes.size() > 2) {
+      cliente.setIsPremium(true);
+    }
 
     return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
 	}

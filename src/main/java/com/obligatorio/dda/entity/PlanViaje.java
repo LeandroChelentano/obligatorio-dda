@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table (name = "planes")
 public class PlanViaje extends Base {
-	@Column (length = 50)
+	@Column (length = 20)
 	private String Destino;
 	
 	@Column (name="Fecha")
