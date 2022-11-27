@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import com.obligatorio.dda.entity.Base;
 
 public interface BaseService<E extends Base, ID> extends Serializable {
-	
 	public Iterable<E> findAll() throws Exception;
 	
 	public Page<E> findAll(Pageable pageable) throws Exception;

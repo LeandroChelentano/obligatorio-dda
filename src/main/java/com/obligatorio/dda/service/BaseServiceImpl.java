@@ -12,8 +12,6 @@ import com.obligatorio.dda.repository.BaseRepository;
 
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
 	protected BaseRepository<E, ID> baseRepository;
-	
-	// private static final long serialVersionUID = 1L;
 
 	public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
 		super();

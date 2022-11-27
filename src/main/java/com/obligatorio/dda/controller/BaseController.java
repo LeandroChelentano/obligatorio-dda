@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.obligatorio.dda.entity.Base;
 
 public interface BaseController<E extends Base, ID extends Serializable> {
-	
 	public ResponseEntity<?> create (@RequestBody E entity) throws Exception;
 	
 	public ResponseEntity<?> read (@PathVariable ID id) throws Exception;
